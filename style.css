@@ -1,0 +1,210 @@
+body{
+font-family:Arial;
+margin:0;
+background:#f5f7fb;
+}
+
+.header{
+text-align:center;
+padding:15px;
+background:white;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+cursor:pointer;
+position:relative;
+}
+
+.logo{
+margin:auto;
+}
+
+.title{
+font-size:22px;
+font-weight:bold;
+}
+
+.container{
+padding:20px;
+padding-bottom:90px;
+}
+
+.center{
+text-align:center;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:#1f6fff;
+color:white;
+font-size:16px;
+margin-top:10px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+cursor:pointer;
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:10px 0;
+box-shadow:0 -2px 8px rgba(0,0,0,0.1);
+}
+
+.page{
+display:none;
+}
+
+.active{
+display:block;
+}
+
+.result{
+background:#e8f0ff;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
+}
+
+.camera-actions{
+display:flex;
+gap:10px;
+margin:10px 0;
+}
+
+.camera-actions button{
+flex:1;
+}
+
+.camera-preview{
+margin-top:15px;
+}
+
+.back-btn{
+width:auto;
+padding:6px 12px;
+margin-bottom:10px;
+background:#e0e3f5;
+color:#333;
+font-size:14px;
+}
+
+.theme-toggle{
+position:absolute;
+right:15px;
+top:15px;
+width:auto;
+padding:6px 10px;
+border-radius:20px;
+font-size:16px;
+background:#1f6fff;
+color:#fff;
+border:none;
+}
+
+.lang-toggle{
+position:absolute;
+right:70px;
+top:15px;
+display:flex;
+gap:6px;
+}
+
+.lang-btn{
+width:auto;
+padding:6px 10px;
+border-radius:14px;
+font-size:12px;
+margin-top:0;
+background:#e0e3f5;
+color:#333;
+}
+
+body.dark .lang-btn{
+background:#1e293b;
+color:#e5e7eb;
+border:1px solid #334155;
+}
+
+body.rtl{
+direction:rtl;
+}
+
+body.rtl .lang-toggle{
+right:auto;
+left:70px;
+}
+
+body.rtl .theme-toggle{
+right:auto;
+left:15px;
+}
+
+/* Dark theme */
+
+body.dark{
+background:#0f172a;
+color:#e5e7eb;
+}
+
+body.dark .header{
+background:#020617;
+box-shadow:0 2px 10px rgba(15,23,42,0.9);
+}
+
+body.dark .container{
+background:transparent;
+}
+
+body.dark .card{
+background:#020617;
+box-shadow:0 2px 10px rgba(15,23,42,0.9);
+color:#e5e7eb;
+}
+
+body.dark .bottom-nav{
+background:#020617;
+box-shadow:0 -2px 10px rgba(15,23,42,0.9);
+color:#e5e7eb;
+}
+
+body.dark input,
+body.dark textarea{
+background:#020617;
+color:#e5e7eb;
+border:1px solid #334155;
+}
+
+body.dark button{
+background:#1d4ed8;
+}
+
+body.dark .result{
+background:#1e293b;
+color:#e5e7eb;
+}
