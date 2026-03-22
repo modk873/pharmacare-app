@@ -4,7 +4,10 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1f6fff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 
 <title>PharmaCare</title>
 
@@ -16,9 +19,11 @@
 
 <div class="header">
 
-<div class="logo" onclick="openPage('loginPage')">
+<div class="header-brand" onclick="openPage('loginPage')">
 
-<svg width="60" height="60" viewBox="0 0 100 100">
+<div class="logo">
+
+<svg class="logo-svg" viewBox="0 0 100 100" aria-hidden="true">
 
 <circle cx="50" cy="50" r="45" fill="#1f6fff"/>
 
@@ -29,16 +34,19 @@
 
 </div>
 
-<div class="title" onclick="openPage('loginPage')">
+<div class="title">
 PharmaCare
 </div>
 
-<button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">🌓</button>
+</div>
 
+<div class="header-actions">
 <div class="lang-toggle">
-<button class="lang-btn" onclick="setLanguage('en')">EN</button>
-<button class="lang-btn" onclick="setLanguage('ar')">AR</button>
-<button class="lang-btn" onclick="setLanguage('ta')">TA</button>
+<button type="button" class="lang-btn" onclick="event.stopPropagation(); setLanguage('en')">EN</button>
+<button type="button" class="lang-btn" onclick="event.stopPropagation(); setLanguage('ar')">AR</button>
+<button type="button" class="lang-btn" onclick="event.stopPropagation(); setLanguage('ta')">TA</button>
+</div>
+<button type="button" id="themeToggle" class="theme-toggle" onclick="event.stopPropagation(); toggleTheme()">🌓</button>
 </div>
 
 </div>
@@ -48,10 +56,10 @@ PharmaCare
 <div id="loginPage" class="container page active">
 
 <h3 data-i18n="login_title">Login</h3>
-3
-<input data-i18n-placeholder="login_email_ph" placeholder="Email">
 
-<input type="password" data-i18n-placeholder="login_password_ph" placeholder="Password">
+<input data-i18n-placeholder="login_email_ph" placeholder="Email" autocomplete="email" inputmode="email">
+
+<input type="password" data-i18n-placeholder="login_password_ph" placeholder="Password" autocomplete="current-password">
 
 <button onclick="login()" data-i18n="login_btn">Login</button>
 
@@ -221,7 +229,7 @@ BMI Calculator
 <input id="crclAge" data-i18n-placeholder="crcl_age_ph" placeholder="Age (years)">
 <input id="crclWeight" data-i18n-placeholder="crcl_weight_ph" placeholder="Weight (kg)">
 <input id="crclScr" data-i18n-placeholder="crcl_scr_ph" placeholder="Serum creatinine (mg/dL)">
-<select id="crclSex" style="width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ccc;">
+<select id="crclSex" class="form-select">
   <option value="male" data-i18n="sex_male">Male</option>
   <option value="female" data-i18n="sex_female">Female</option>
 </select>
@@ -263,7 +271,7 @@ BMI Calculator
 <p data-i18n="para_desc">Estimate maximum safe dosing guidance (educational only).</p>
 
 <input id="paraWeight" data-i18n-placeholder="para_weight_ph" placeholder="Weight (kg)">
-<select id="paraGroup" style="width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ccc;">
+<select id="paraGroup" class="form-select">
   <option value="child" data-i18n="para_child">Child</option>
   <option value="adult" data-i18n="para_adult">Adult</option>
 </select>
@@ -287,7 +295,7 @@ BMI Calculator
 
 <div id="doseResult" class="result"></div>
 
-<h4 style="margin-top:20px;" data-i18n="side_effect_title">Side Effect Checker</h4>
+<h4 class="section-heading" data-i18n="side_effect_title">Side Effect Checker</h4>
 <p data-i18n="side_effect_desc">Type a symptom (e.g., cough, bleeding, nausea) and the app suggests possible drug-related causes (educational only).</p>
 <input id="symptomInput" data-i18n-placeholder="side_effect_ph" placeholder="Symptom (e.g. cough, bleeding)">
 <button onclick="checkSideEffect()" data-i18n="side_effect_btn">Check Side Effect</button>
@@ -388,6 +396,8 @@ BMI Calculator
 
 <div class="result" id="diseaseContent"></div>
 
+</div>
+
 <!-- CLINICAL GUIDELINES -->
 
 <div id="guidelinesPage" class="container page">
@@ -436,11 +446,9 @@ BMI Calculator
 <button class="back-btn" onclick="goBack('dashboardPage')" data-i18n="back_btn">← Back</button>
 <p data-i18n="notes_desc">A place to save pharmacist notes or patient info (stored locally on this device only).</p>
 
-<textarea id="notesArea" rows="8" style="width:100%;border-radius:10px;border:1px solid #ccc;padding:10px;"></textarea>
+<textarea id="notesArea" class="notes-textarea" rows="8" placeholder=""></textarea>
 <button onclick="saveNotes()" data-i18n="notes_btn">Save Notes</button>
 <div id="notesStatus" class="result"></div>
-
-</div>
 
 </div>
 
@@ -495,16 +503,16 @@ BMI Calculator
 <button onclick="document.getElementById('imageInput').click()" data-i18n="camera_upload_btn">Upload Image</button>
 </div>
 
-<input id="imageInput" type="file" accept="image/*" style="display:none" onchange="handleImageUpload(event)">
+<input id="imageInput" class="visually-hidden-input" type="file" accept="image/*" onchange="handleImageUpload(event)">
 
 <div class="camera-preview">
-<video id="cameraVideo" autoplay playsinline style="width:100%;border-radius:12px;display:none;"></video>
-<img id="cameraImagePreview" style="width:100%;border-radius:12px;display:none;">
+<video id="cameraVideo" class="camera-video" autoplay playsinline></video>
+<img id="cameraImagePreview" class="camera-image-preview" alt="">
 </div>
 
 <div id="cameraStatus" class="result"></div>
 
-<h4 style="margin-top:25px;" data-i18n="barcode_title">🏷️ Drug Barcode Scanner</h4>
+<h4 class="section-heading section-heading--loose" data-i18n="barcode_title">🏷️ Drug Barcode Scanner</h4>
 <p data-i18n="barcode_desc">Point the camera to the barcode (demo), or type the barcode manually.</p>
 
 <input id="barcodeInput" data-i18n-placeholder="barcode_ph" placeholder="Example: 1234567890123">
@@ -549,33 +557,39 @@ BMI Calculator
 
 <!-- BOTTOM NAV -->
 
-<div class="bottom-nav">
+<nav class="bottom-nav" aria-label="Main">
 
-<div onclick="openPage('dashboardPage')">
-🏠<br><span data-i18n="nav_dashboard">Dashboard</span>
-</div>
+<button type="button" class="bottom-nav-item" onclick="openPage('dashboardPage')">
+<span class="bottom-nav-icon" aria-hidden="true">🏠</span>
+<span class="bottom-nav-label" data-i18n="nav_dashboard">Dashboard</span>
+</button>
 
-<div onclick="openPage('cameraPage')">
-📷<br><span data-i18n="nav_camera">Camera</span>
-</div>
+<button type="button" class="bottom-nav-item" onclick="openPage('cameraPage')">
+<span class="bottom-nav-icon" aria-hidden="true">📷</span>
+<span class="bottom-nav-label" data-i18n="nav_camera">Camera</span>
+</button>
 
-<div onclick="openPage('libraryPage')">
-💊<br><span data-i18n="nav_drugs">Drugs</span>
-</div>
+<button type="button" class="bottom-nav-item" onclick="openPage('libraryPage')">
+<span class="bottom-nav-icon" aria-hidden="true">💊</span>
+<span class="bottom-nav-label" data-i18n="nav_drugs">Drugs</span>
+</button>
 
-<div onclick="openPage('accountPage')">
-👤<br><span data-i18n="nav_account">Account</span>
-</div>
+<button type="button" class="bottom-nav-item" onclick="openPage('accountPage')">
+<span class="bottom-nav-icon" aria-hidden="true">👤</span>
+<span class="bottom-nav-label" data-i18n="nav_account">Account</span>
+</button>
 
-<div onclick="openPage('pharmacyLocatorPage')">
-🗺️<br><span data-i18n="nav_locator">Locator</span>
-</div>
+<button type="button" class="bottom-nav-item" onclick="openPage('pharmacyLocatorPage')">
+<span class="bottom-nav-icon" aria-hidden="true">🗺️</span>
+<span class="bottom-nav-label" data-i18n="nav_locator">Locator</span>
+</button>
 
-<div onclick="openPage('drugNewsPage')">
-📰<br><span data-i18n="nav_news">News</span>
-</div>
+<button type="button" class="bottom-nav-item" onclick="openPage('drugNewsPage')">
+<span class="bottom-nav-icon" aria-hidden="true">📰</span>
+<span class="bottom-nav-label" data-i18n="nav_news">News</span>
+</button>
 
-</div>
+</nav>
 
 <script src="script.js"></script>
 
